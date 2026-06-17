@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A manufacturing project for a client",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string" },
+        "creationDate": { "type": "string", "format": "date" },
+        "deliveryDate": { "type": "string", "format": "date" },
+        "totalAmount": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "productionSteps": { "type": "array" },
+        "files": { "type": "array" }
+      },
+      "required": ["name", "clientId", "status"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "A client of the sign shop",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["PARTICULIER", "REVENDEUR", "ENTREPRISE"] },
+        "contactEmail": { "type": "string", "format": "email" },
+        "contactPhone": { "type": "string" },
+        "projectIds": { "type": "array" },
+        "rc": { "type": "string" },
+        "nif": { "type": "string" },
+        "nis": { "type": "string" },
+        "bankAccount": { "type": "string" }
+      },
+      "required": ["name", "type"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User account info and authorization",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "isAuthorized": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "isAuthorized"]
+    },
+    "ProductionStepTemplate": {
+      "title": "Production Step Template",
+      "description": "A template for a production step with pricing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "billingType": { "type": "string", "enum": ["PER_UNIT", "PER_SQM", "FIXED"] },
+        "pricing": { "type": "object" }
+      },
+      "required": ["name", "billingType", "pricing"]
+    },
+    "StockItem": {
+      "title": "Stock Item",
+      "description": "A material or item in stock",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "minQuantity": { "type": "number" },
+        "pricePerUnit": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "quantity", "unit"]
+    }
+  },
+  "firestore": {
+    "projects": {
+      "schema": "Project",
+      "description": "Collection of all projects"
+    },
+    "clients": {
+      "schema": "Client",
+      "description": "Collection of all clients"
+    },
+    "productionStepTemplates": {
+      "schema": "ProductionStepTemplate",
+      "description": "Collection of production step templates"
+    },
+    "users": {
+      "schema": "User",
+      "description": "Collection of users and their authorization status"
+    },
+    "stock": {
+      "schema": "StockItem",
+      "description": "Collection of stock items and materials"
+    }
+  }
+}

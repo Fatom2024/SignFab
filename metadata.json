@@ -1,0 +1,6 @@
+{
+  "name": "SignFab Manager7",
+  "description": "An application for managing projects, clients, and production workflows for a sign and printing manufacturing company. Powered by Firebase for authentication and real-time database.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
